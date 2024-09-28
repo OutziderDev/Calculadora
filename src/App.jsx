@@ -1,4 +1,16 @@
 import { useState } from 'react'
+function ContenedorPrincipal (){
+  return( 
+    <>
+    <Button valor={1} />
+    <Button valor="2" />
+    <Button valor={1} />
+    <Button valor={1} />
+    <Button valor={1} />
+    <Button valor={1} />
+    </>
+  )
+}
 
 function Button (props){
   return(
@@ -17,12 +29,7 @@ function App() {
           <input type="text" />
         </section>
         <section className='grid grid-cols-4 gap-2 '>
-          <Button valor={1} />
-          <Button valor="2" />
-          <Button valor={1} />
-          <Button valor={1} />
-          <Button valor={1} />
-          <Button valor={1} />
+          <ContenedorPrincipal/>
         </section>
       </main>
     </>
