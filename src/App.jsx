@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import Button from './Components/Button'
+
 function ContenedorPrincipal (){
   return( 
     <>
@@ -12,11 +14,7 @@ function ContenedorPrincipal (){
   )
 }
 
-function Button (props){
-  return(
-    <button className='bg-slate-200 rounded hover:bg-slate-400 active:translate-y-0.5'>{props.valor}</button>
-  )
-}
+
 
 function App() {
   const [count, setCount] = useState(0)
