@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import Button from './Components/Button'
+import Navbar from './Components/Navbar'
 
-function ContenedorPrincipal (){
+const ContenedorPrincipal = () =>{
   return( 
     <>
     <Button valor={1} />
@@ -21,7 +22,8 @@ function App() {
 
   return (
     <>
-      <h1 className='text-7xl font-mono font-extrabold  flex items-center justify-center'>Calculadora</h1>
+      <Navbar/>
+      <h1 className='text-7xl font-mono font-extrabold  flex items-center justify-center mt-20'>Calculadora</h1>
       <main className='grid place-content-center'>
         <section>
           <input type="text" />
