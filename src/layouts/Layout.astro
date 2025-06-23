@@ -1,22 +1,39 @@
+---
+import Footer from "../sections/Footer.astro";
+import Header from "../sections/Header.astro";
+---
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>Calculador de Materiales</title>
 	</head>
 	<body>
-		<slot />
+    <Header/>
+    <main>
+      <slot />
+    </main>
+    <Footer/>
 	</body>
 </html>
 
-<style>
+<style is:global>
+  :root{
+    --color-base: #070D0E;
+    --color-primario: #12181A;
+    --color-secundario: #252A2C;
+  }
+
 	html,
 	body {
 		margin: 0;
 		width: 100%;
 		height: 100%;
+    background: var(--color-base);
+    font-family: 'Roboto', sans-serif;
+
 	}
 </style>
