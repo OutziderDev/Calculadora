@@ -1,0 +1,89 @@
+---
+
+---
+<sidebar id="sidebarMenu" class="">
+  <input type="checkbox" id="toggle-sidebar" hidden >
+
+  <div class="title-sidebar">
+    <h3>Menú</h3>
+    <label for="toggle-sidebar">
+      <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round" ><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 4l0 10" /><path d="M12 4l4 4" /><path d="M12 4l-4 4" /><path d="M4 20l16 0" /></svg>
+    </label>
+  </div>
+
+  <ul>
+    <li>Casa</li>
+    <li>perro</li>
+  </ul>
+</sidebar>
+
+<style>
+  sidebar {
+    color: #fff;
+    width: 15rem;
+    background-color: var(--color-primario);
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+
+  }
+
+  sidebar:has(#toggle-sidebar:checked){
+    width: 4rem;
+    transition: width 0.2s ease;
+    .title-sidebar {
+      justify-content: center;
+    }
+
+    .title-sidebar h3 {
+      display: none;
+    }
+    .title-sidebar label svg {
+      transform: rotate(90deg);
+      
+    }
+  }
+
+  .sidebarTranslate {
+    display: none;
+  }
+
+  .title-sidebar {
+    display: flex;
+    flex-direction: row;
+    place-items: center;
+    width: 100%;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--color-secundario);
+    padding-bottom: 0.2rem;
+
+    & h3 {
+      margin: 0;
+      padding: 0;
+    }
+
+    & label { 
+      display: flex; 
+      background: none;
+      padding: 0.5rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    
+      & svg {
+        stroke: #fff;
+        transform: rotate(-90deg);
+      }
+    }
+
+    & label:hover {
+      background-color: var(--color-secundario);
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('toggleSidebar', ()=> {
+    const sidebar = document.getElementById('sidebarMenu');
+    sidebar?.classList.toggle('sidebarTranslate')
+  })
+</script>
