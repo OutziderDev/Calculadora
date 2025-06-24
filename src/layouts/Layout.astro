@@ -1,6 +1,8 @@
 ---
 import Footer from "../sections/Footer.astro";
 import Header from "../sections/Header.astro";
+import Sidebar from "../sections/Sidebar.astro";
+const pageTitle: string = Astro.props.title || "Calculador de Materiales"
 ---
 <!doctype html>
 <html lang="es">
@@ -9,11 +11,12 @@ import Header from "../sections/Header.astro";
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Calculador de Materiales</title>
+		<title>{pageTitle}</title>
 	</head>
 	<body>
     <Header/>
     <main>
+      <Sidebar/>
       <slot />
     </main>
     <Footer/>
