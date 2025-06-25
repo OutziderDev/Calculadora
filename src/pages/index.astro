@@ -7,17 +7,29 @@ import { Image } from 'astro:assets';
 <Layout>
    <section>
       <div class="grid">
-        <div class="item">
-          <p>para construir</p>
-          <Image src={bucketIlustration} width={bucketIlustration.width} height={bucketIlustration.height} alt="Ilustracion de balde de minicargador" />
-        </div>
-        <div class="item">
+        <a href="/maquinas" class="item">
+          <p>Consulta la capacidad de tus maquinarias pesadas</p>
+          <div class="item-data">
+            <p>Saca tus calculos para que sepas exactamente cuanta materia petrea estas distribuyendo con cada pala de tus maquinarias</p>
+            <Image src={bucketIlustration} width={bucketIlustration.width} height={bucketIlustration.height} alt="Ilustracion de balde de minicargador" />
+          </div>
+        </a>
+        <a href="/" class="item">
           <p>Para construir piso</p>
-          <Image src={pisoIlustration} width={pisoIlustration.width} height={pisoIlustration.height} alt="Ilustracion de la sección de pisos" />
-        </div>
-        <div class="item">caca</div>
-        <div class="item">saca</div>
-        <div class="item">casa</div>
+          <div class="item-data">
+            <p>Calcula tus materiales para el piso</p>
+            <Image src={pisoIlustration} width={pisoIlustration.width} height={pisoIlustration.height} alt="Ilustracion de la sección de pisos" />
+          </div>
+        </a>
+        <a href="/" class="item">
+          <p>Calcula el volumen de tus baldes</p>
+          <div class="item-data"></div>
+        </a>
+        <a href="/" class="item">
+          <p>Calcula el volumen de tus baldes</p>
+
+        </a>
+        
       </div>
    </section>
 </Layout>
@@ -34,31 +46,62 @@ import { Image } from 'astro:assets';
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
+
+      & a {
+        text-decoration: none;
+        color: #fff;
+        overflow: hidden;
+      }
+
+      :hover{
+        background-color: var(--color-secundario);
+        transition: background-color 0.3s ease-in-out;
+      }
     }
+
     .item {
       background-color: var(--color-primario);
-      overflow:hidden;
       display: flex;
-      padding: 1.5rem;
+      flex-direction: column;
+      padding: 1rem;
       border-radius: 15px;
       box-shadow: 1px 1px 3px 1px #fff3;
 
-      & p {
-        
+      & > p {
+        width: 100%;
+        padding-bottom: 0.4rem;
+        font-weight: bolder;
+        font-size: 1.3rem;
+        font-style: italic;
+        border-bottom: #fff3 1px solid;
+        text-wrap: balance;
+      }
+    }
+
+    .item-data {
+      display: flex;
+      flex-direction: row;
+      justify-items: center;
+
+      & > p {
+        margin: 0;
+        text-wrap: balance;
+        opacity: 0.8;
+        font-size: 1.1rem;
       }
 
       & img {
-        width: 80%;
-        user-select: none;
-        height: 80%;
-        object-fit: contain;
+        margin: 0;
+        padding: 0;
+        width: 70%;
+        height: 70%;
+        object-fit: cover;
       }
     }
 
     @media (width < 768px) {
       .grid {
         grid-template-columns: repeat(1, minmax(0, 1fr));
-        
       }
     }
   }
