@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import bucketIlustration from '../assets/ilustrations/bucketIlus.png'
 import pisoIlustration from '../assets/ilustrations/pisoIlus.png'
 import techosIlustration from '../assets/ilustrations/techosIlus.png'
+import paredesIlustration from '../assets/ilustrations/paredesIlus.png'
 import { Image } from 'astro:assets';
 ---
 <Layout>
@@ -13,25 +14,38 @@ import { Image } from 'astro:assets';
             <Image src={bucketIlustration} width={bucketIlustration.width} height={bucketIlustration.height} alt="Ilustracion de balde de minicargador" />
           </div>
           <div class="item-data">
-            <h3>Calcula la capacidad de carga de tus maquinarias</h3>
-            <p>Obtén una estimación precisa del volumen de material que transportas por cada carga de tu retroexcavadora, bobcat u otra maquinaria pesada.</p>
+            <h3>Calcula la carga de tus maquinarias</h3>      
+            <p>Determina el volumen de material pétreo que manejas por cada ciclo de carga con retroexcavadoras, minicargadores y similares.</p>
           </div>
         </a>
 
-        <a href="/" class="item">
-          <p>Para construir piso</p>
-          <div class="item-data">
-            <p>Calcula tus materiales para el piso</p>
+        <a href="/pisos" class="item">
+          <div class="item-img">
             <Image src={pisoIlustration} width={pisoIlustration.width} height={pisoIlustration.height} alt="Ilustracion de la sección de pisos" />
           </div>
+          <div class="item-data">
+            <h3>Revestimiento de pisos</h3>
+            <p>Obtén un estimado del material necesario para instalar pisos decorativos.</p>
+          </div>
         </a>
-        <a href="/" class="item">
-          <p>Calcula el volumen de tus baldes</p>
-          <div class="item-data"></div>
-        </a>
-        <a href="/" class="item item-spam">
-          <p>Calcula el volumen de tus baldes</p>
 
+        <a href="/paredes" class="item">
+          <div class="item-img">
+            <Image src={paredesIlustration} width={paredesIlustration.width} height={paredesIlustration.height} alt="Ilustracion de balde de minicargador" />
+          </div>
+          <div class="item-data">
+            <h3>Construcción rápida con sistema Convitec</h3>      
+            <p>Cálculo detallado de materiales para levantar paredes modulares en espacios de cualquier tamaño: desde baños hasta viviendas completas.</p>          </div>
+        </a>
+
+        <a href="/paredes" class="item item-spam">
+          <div class="item-img">
+            <Image src={techosIlustration} width={techosIlustration.width} height={techosIlustration.height} alt="Ilustracion de balde de minicargador" />
+          </div>
+          <div class="item-data">
+            <h3>Planifica tu cielo raso fácilmente</h3>
+            <p>Calcula cuántos paneles, mallas y perfiles metálicos necesitas para construir paredes con el sistema Convitec según las dimensiones de tu proyecto.</p>
+          </div>
         </a>
         
       </div>
@@ -40,15 +54,17 @@ import { Image } from 'astro:assets';
 
 <style>
   section {
-    width: 60%;
+    width: 70%;
     height: 100%;
     margin-inline: auto;
     padding: 0.5rem  ;
     color: #fff;
-    
+     
     .grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      padding-bottom: 3rem;
+      width: 100%;
+      grid-template-columns: 1fr 1fr ;
       gap: 2rem;
 
       & a {
@@ -66,6 +82,7 @@ import { Image } from 'astro:assets';
     .item {
       background-color: var(--color-primario);
       display: flex;
+       
       flex-direction: column;
       padding: 1rem;
       border-radius: 15px;
@@ -84,7 +101,7 @@ import { Image } from 'astro:assets';
 
     .item-img{
       width: 100%;
-      height: 400px;
+      height: 350px;
 
       & > img {
         width: 100%;
@@ -100,20 +117,21 @@ import { Image } from 'astro:assets';
         padding: 0.2rem;
         font-size: 1.3rem;
         border-bottom: #fff3 1px solid;
+        font-style: italic;
       }
 
       & > p {
         margin: 0;
         padding:0.2rem;
-        text-wrap: balance;
+        text-wrap: pretty;
         opacity: 0.7;
         font-size: 1.1rem;
-        width: 100%;
+         
       }
     }
 
     .item-spam{
-      grid-column: span 2;
+      grid-column: span 1;
     }
 
     @media (width < 768px) {
