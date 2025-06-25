@@ -1,16 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import bucketIlustration from '../assets/ilustrations/bucketCalculator.png'
-
+import pisoIlustration from '../assets/ilustrations/pisoCalculador.png'
+import { Image } from 'astro:assets';
 ---
 <Layout>
    <section>
       <div class="grid">
         <div class="item">
           <p>para construir</p>
-          <img src={bucketIlustration.src} alt="Ilustracion de balde de minicargador">
+          <Image src={bucketIlustration} width={bucketIlustration.width} height={bucketIlustration.height} alt="Ilustracion de balde de minicargador" />
         </div>
-        <div class="item">casa</div>
+        <div class="item">
+          <p>Para construir piso</p>
+          <Image src={pisoIlustration} width={pisoIlustration.width} height={pisoIlustration.height} alt="Ilustracion de la sección de pisos" />
+        </div>
         <div class="item">caca</div>
         <div class="item">saca</div>
         <div class="item">casa</div>
@@ -28,18 +32,25 @@ import bucketIlustration from '../assets/ilustrations/bucketCalculator.png'
     
     .grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 10px;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
     }
     .item {
       background-color: var(--color-primario);
       overflow:hidden;
       display: flex;
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 1px 1px 3px 1px #fff3;
+
+      & p {
+        
+      }
 
       & img {
-        aspect-ratio: 1 /1;
-        width: 100%;
-        height: 50%;
+        width: 80%;
+        user-select: none;
+        height: 80%;
         object-fit: contain;
       }
     }
