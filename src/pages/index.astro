@@ -1,16 +1,54 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import bucketIlustration from '../assets/ilustrations/bucketCalculator.png'
+
 ---
 <Layout>
-   
+   <section>
+      <div class="grid">
+        <div class="item">
+          <p>para construir</p>
+          <img src={bucketIlustration.src} alt="Ilustracion de balde de minicargador">
+        </div>
+        <div class="item">casa</div>
+        <div class="item">caca</div>
+        <div class="item">saca</div>
+        <div class="item">casa</div>
+      </div>
+   </section>
 </Layout>
 
 <style>
   section{
-    width: 100%;
+    width: 90%;
     height: 100%;
-    margin: 0.5rem 0 0 0.5rem;
+    margin-inline: auto;
+    padding: 0.5rem  ;
     color: #fff;
-    background-color: var(--color-primario);
+    
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+    .item {
+      background-color: var(--color-primario);
+      overflow:hidden;
+      display: flex;
+
+      & img {
+        aspect-ratio: 1 /1;
+        width: 100%;
+        height: 50%;
+        object-fit: contain;
+      }
+    }
+
+    @media (width < 768px) {
+      .grid {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        
+      }
+    }
   }
 </style>
