@@ -1,19 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import bucketIlustration from '../assets/ilustrations/bucketCalculator.png'
-import pisoIlustration from '../assets/ilustrations/pisoCalculador.png'
+import bucketIlustration from '../assets/ilustrations/bucketIlus.png'
+import pisoIlustration from '../assets/ilustrations/pisoIlus.png'
+import techosIlustration from '../assets/ilustrations/techosIlus.png'
 import { Image } from 'astro:assets';
 ---
 <Layout>
    <section>
       <div class="grid">
-        <a href="/maquinas" class="item">
-          <p>Consulta la capacidad de tus maquinarias pesadas</p>
-          <div class="item-data">
-            <p>Saca tus calculos para que sepas exactamente cuanta materia petrea estas distribuyendo con cada pala de tus maquinarias</p>
+        <a href="/maquinas" class="item item-spam">
+          <div class="item-img">
             <Image src={bucketIlustration} width={bucketIlustration.width} height={bucketIlustration.height} alt="Ilustracion de balde de minicargador" />
           </div>
+          <div class="item-data">
+            <h3>Calcula la capacidad de carga de tus maquinarias</h3>
+            <p>Obtén una estimación precisa del volumen de material que transportas por cada carga de tu retroexcavadora, bobcat u otra maquinaria pesada.</p>
+          </div>
         </a>
+
         <a href="/" class="item">
           <p>Para construir piso</p>
           <div class="item-data">
@@ -25,7 +29,7 @@ import { Image } from 'astro:assets';
           <p>Calcula el volumen de tus baldes</p>
           <div class="item-data"></div>
         </a>
-        <a href="/" class="item">
+        <a href="/" class="item item-spam">
           <p>Calcula el volumen de tus baldes</p>
 
         </a>
@@ -35,8 +39,8 @@ import { Image } from 'astro:assets';
 </Layout>
 
 <style>
-  section{
-    width: 90%;
+  section {
+    width: 60%;
     height: 100%;
     margin-inline: auto;
     padding: 0.5rem  ;
@@ -44,7 +48,7 @@ import { Image } from 'astro:assets';
     
     .grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 2rem;
 
       & a {
@@ -78,28 +82,43 @@ import { Image } from 'astro:assets';
       }
     }
 
-    .item-data {
-      display: flex;
-      flex-direction: row;
-      justify-items: center;
+    .item-img{
+      width: 100%;
+      height: 400px;
 
-      & > p {
-        margin: 0;
-        text-wrap: balance;
-        opacity: 0.8;
-        font-size: 1.1rem;
-      }
-
-      & img {
-        margin: 0;
-        padding: 0;
-        width: 70%;
-        height: 70%;
-        object-fit: cover;
+      & > img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
       }
     }
 
+    .item-data {
+      
+      & > h3 {
+        margin: 0;
+        padding: 0.2rem;
+        font-size: 1.3rem;
+        border-bottom: #fff3 1px solid;
+      }
+
+      & > p {
+        margin: 0;
+        padding:0.2rem;
+        text-wrap: balance;
+        opacity: 0.7;
+        font-size: 1.1rem;
+        width: 100%;
+      }
+    }
+
+    .item-spam{
+      grid-column: span 2;
+    }
+
     @media (width < 768px) {
+       width: 100%;
+       
       .grid {
         grid-template-columns: repeat(1, minmax(0, 1fr));
       }
