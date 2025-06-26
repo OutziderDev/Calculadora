@@ -1,8 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Image from "astro/components/Image.astro";
+import bucketIlustration from '../assets/ilustrations/bucketIlus.png'
 ---
 <Layout title="Capacidad de Carga de Retroexcavadora ">
   <section>
-  
+    <Image transition:name="pala" transition:persist src={bucketIlustration} width={bucketIlustration.width} height={bucketIlustration.height} alt="Ilustracion de balde de minicargador" />
+
   </section>
 </Layout>

@@ -2,6 +2,7 @@
 import Footer from "../sections/Footer.astro";
 import Header from "../sections/Header.astro";
 import Sidebar from "../sections/Sidebar.astro";
+import { ClientRouter } from "astro:transitions";
 const pageTitle: string = Astro.props.title || "Calculador de Materiales"
 ---
 <!doctype html>
@@ -12,6 +13,7 @@ const pageTitle: string = Astro.props.title || "Calculador de Materiales"
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{pageTitle}</title>
+    <ClientRouter />
 	</head>
 	<body>
     <Header/>
