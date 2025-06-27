@@ -11,18 +11,23 @@ import ChangeIcon from '../assets/icons/transfer.svg'
       <div class="item bg-color">
         <h3 class="item-title">Conversiones de Longitudes</h3>
         <div class="item-data">
-          <div>
+          
+          <div class="conversiones">
             <div class="yarda-metro">
               <span>Yardas</span>
+              <input type="text" name="" placeholder="1 yarda" id="">
             </div>
             <button>
               <ChangeIcon stroke="white"/>
             </button>
             <div class="yarda-metro">
-              <span>Yardas</span>
+              <span>Metros</span>
+              <input type="text" name="" placeholder="1 yarda" id="">
             </div>
-                  </div>
           </div>
+          
+
+        </div>
       </div>
       
       <div class="item img-item">
@@ -83,20 +88,60 @@ import ChangeIcon from '../assets/icons/transfer.svg'
         padding: 0.5rem;
       }
       .item-data{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0.5rem;
 
-        & > button{
+        .conversiones{
           display: flex;
-          
           align-items: center;
-          justify-items: center;
-          background: var(--color-base);
-          cursor: pointer;
-          border: none;
-          border-radius: 5px;
+          gap: 1rem;
 
-          :hover {
-            background-color: var(--color-secundario);
+          & > button{
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            background: none;
+            cursor: pointer;
+            border: none;
+            
+
+            & > svg{
+              padding: 0;
+              width: 100%;
+              border-radius: 3px;
+              padding: 0.3rem;
+              background: var(--color-base);
+              border:1px solid var(--color-secundario ) ;
+            }
+
+            :hover {
+              background-color: var(--color-secundario);
+            }
           }
+
+          .yarda-metro{
+            display: flex;
+            gap: 0.5rem;
+            flex-direction: column;
+            align-items: center;
+
+            & input {
+              width: 90%;
+              background: #ececec;
+              border: none;
+              padding: 0.2rem;
+              border-radius: 5px;
+              outline:none;
+              box-shadow:  1px 1px 1px 2px rgb(7, 219, 53);
+            }
+
+            & span{
+              font-weight: bold;
+            }
+          }
+
         }
       }
     }
