@@ -15,14 +15,14 @@ import ChangeIcon from '../assets/icons/transfer.svg'
           <div class="conversiones">
             <div class="yarda-metro">
               <span>Yardas</span>
-              <input type="text" name="" placeholder="1 yarda" id="">
+              <input type="number" min="0" id="yardas" name="" placeholder="1 yarda" id="">
             </div>
             <button>
               <ChangeIcon stroke="white"/>
             </button>
             <div class="yarda-metro">
               <span>Metros</span>
-              <input type="text" name="" placeholder="1 yarda" id="">
+              <input type="number" min="0" id="metros" name="" placeholder="0.91 metros" id="">
             </div>
           </div>
           <div class="result">
@@ -197,3 +197,23 @@ import ChangeIcon from '../assets/icons/transfer.svg'
     background-color: var(--color-primario);
   }
 </style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const inputYardas = document.getElementById("yardas");
+    const inputMetros = document.getElementById("metros");
+    const resultadoLabel = document.getElementById("resultado")
+    const resulMetrica = document.getElementById("metrica")
+
+    inputYardas?.addEventListener("change", () => {
+      const yardas = parseFloat(inputYardas.value);
+      if (!isNaN(yardas)) {
+        inputMetros.value = (yardas * 0.9144).toFixed(2); // redondea a 2 decimales
+        resulMetrica.innerHTML = "mts"
+        resultadoLabel.innerHTML= (yardas * 0.9144).toFixed(2);
+      } else {
+        inputMetros.value = "";
+      }
+    });
+  });
+</script>
