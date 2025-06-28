@@ -9,32 +9,40 @@ import ChangeIcon from '../assets/icons/transfer.svg'
     <h1>¡Calcula todo sobre tus maquinarias!</h1>
     <div class="grid">
       <div class="item bg-color">
-        <h3 class="item-title">Conversiones de Longitud</h3>
+        <h3 class="item-title">Conversor de Volumen de Materiales</h3>
         <div class="item-data">
           
           <div class="conversiones">
             <div class="yarda-metro">
-              <span>Yardas</span>
-              <input type="number" min="0" id="yardas" name="" placeholder="1 yarda" id="">
+              <select id="opc1" name="" >
+                <option value="yarda" selected>Yarda (yd3)</option>
+                <option value="metros"> Metros (mt3)</option>
+              </select>
             </div>
             <button>
               <ChangeIcon stroke="white"/>
             </button>
             <div class="yarda-metro">
-              <span>Metros</span>
-              <input type="number" min="0" id="metros" name="" placeholder="0.91 metros" id="">
+              <select id="opc2" name="" >
+                <option value="yarda" >Yarda (yd3)</option>
+                <option value="metros" selected> Metros (mt3)</option>
+              </select>
             </div>
           </div>
+          <div class="cantidad">
+            <label for="cant">Cantidad:</label>
+            <input type="number" min="0" placeholder="6" id="cant">
+          </div>
           <div class="result">
-            <p id="resultado">0.76<span id="metrica"> mts</span></p>
+            <p id="resultado">0</p>
+            <span id="metrica"> mt<sup>3</sup></span>
           </div>
           
-
         </div>
       </div>
       
       <div class="item img-item">
-        <Image transition:name="pala" transition:persist src={bucketIlustration} width={bucketIlustration.width} height={bucketIlustration.height} alt="Ilustracion de balde de minicargador" />
+        <Image priority transition:name="pala" transition:persist src={bucketIlustration} width={bucketIlustration.width} height={bucketIlustration.height} alt="Ilustracion de balde de minicargador" />
       </div>
 
       <div class="item bg-color">
@@ -87,7 +95,7 @@ import ChangeIcon from '../assets/icons/transfer.svg'
         margin: 0;
         text-align: center;
         font-style: italic;
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         padding: 0.5rem;
       }
       .item-data{
@@ -99,9 +107,9 @@ import ChangeIcon from '../assets/icons/transfer.svg'
         .conversiones{
           display: flex;
           align-items: center;
+          justify-content: center;
           gap: 1rem;
           padding-bottom: 1.2rem;
-          border-bottom: 1px solid var(--color-secundario);
 
           & > button{
             display: flex;
@@ -132,8 +140,8 @@ import ChangeIcon from '../assets/icons/transfer.svg'
             flex-direction: column;
             align-items: center;
 
-            & input {
-              width: 90%;
+            & select {
+              width: 100%;
               background: #ececec;
               border: none;
               padding: 0.3rem;
@@ -142,7 +150,7 @@ import ChangeIcon from '../assets/icons/transfer.svg'
               outline:none;
                box-shadow:  1px 1px 1px 2px rgb(152, 152, 152);
             }
-            & input:focus {
+            & select:focus {
                box-shadow:  1px 1px 1px 2px rgb(243, 196, 9);
               }
 
@@ -152,21 +160,59 @@ import ChangeIcon from '../assets/icons/transfer.svg'
           }
 
         }
+        
+        .cantidad{
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding-bottom: 1rem;
+          border-bottom: 2px solid var(--color-secundario);
 
+          label{
+            text-align: start;
+          }
+
+          input {
+            width: 72%;
+            margin-top: 6px;
+            background: #ececec;
+            border: none;
+            padding: 0.3rem;
+            border-radius: 5px;
+            text-align: end;
+            outline:none;
+            box-shadow:  1px 1px 1px 2px rgb(152, 152, 152);
+          }
+
+          @media (width < 768px) {
+            input {
+              width: 90%;
+            }
+          }
+        }
+        
         .result{
           width: 100%;
-          height: 200px;
+          height: auto;
+          margin-top: 4%;
           display: flex;
+          gap: 1rem;
           font-family: monospace ;
           justify-content: center;
           align-items: center;
+
           p{
             font-size: 4rem;
             margin: 0;
             padding: 0;
+          }
+          span {
+            font-size: 3rem;
+            text-transform: uppercase;
 
-            & > span {
-              font-size: 3rem;
+            & > sup{
+              font-size: 1.5rem;
             }
           }
         }
@@ -198,7 +244,7 @@ import ChangeIcon from '../assets/icons/transfer.svg'
   }
 </style>
 
-<script>
+<!-- <script>
   document.addEventListener("astro:page-load", () => {
     const inputYardas = document.getElementById("yardas");
     const inputMetros = document.getElementById("metros");
@@ -216,4 +262,4 @@ import ChangeIcon from '../assets/icons/transfer.svg'
       }
     });
   });
-</script>
+</script> -->
