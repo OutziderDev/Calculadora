@@ -33,11 +33,11 @@ import ChangeIcon from '../assets/icons/transfer.svg'
           </div>
           <div class="cantidad">
             <!-- <label for="cant">Cantidad:</label> -->
-            <input type="number" min="0" placeholder=" Cantidad: 6" id="cant">
+            <input type="number" min="0" max="50" placeholder=" Cantidad: 6"   id="cant">
           </div>
           <div class="result">
             <p id="resultado">0</p>
-            <span id="metrica"> mt<sup>3</sup></span>
+            <span id="metrica"> mt</span><sup id="exponente">3</sup>
           </div>
           
         </div>
@@ -192,23 +192,31 @@ import ChangeIcon from '../assets/icons/transfer.svg'
             padding: 0;
           }
           span {
+            margin: 0;
             font-size: 3rem;
             text-transform: uppercase;
-
-            & > sup{
-              font-size: 1.5rem;
-            }
+          }
+          sup{
+            margin-left: -15px;
+            margin-top: -15px;
+            padding: 0;
+            font-size: 1.5rem;
           }
         }
 
-        @media (width < 768px)
+        @media (width < 1024px)
         {
           .result {
             p{
+              font-size: 3rem;
+            }
+
+            span {
               font-size: 2rem;
-              & > span {
-                font-size: 1rem;
-              }
+            }
+
+            sup {
+              font-size: 1rem;
             }
           }
         }
@@ -233,14 +241,20 @@ import ChangeIcon from '../assets/icons/transfer.svg'
     const select1  = document.getElementById('opc1')! as HTMLSelectElement 
     const select2 = document.getElementById('opc2')! as HTMLSelectElement
     const btnchange = document.getElementById('changeUnidad')
+    const inputCant = document.getElementById('cant') as HTMLInputElement
+    const textResultado = document.getElementById('resultado')
+    const textMetrica = document.getElementById('metrica') 
+    const textExponente = document.getElementById('exponente')
 
-    const intercambiar = () => {
+    btnchange?.addEventListener('click', () => {
       const temp = select1.value
       select1.value = select2.value
       select2.value = temp
-    }
-
-    btnchange?.addEventListener('click', () => intercambiar())
+      inputCant.value = ''
+      if (textResultado) textResultado.innerHTML = '0';
+      if (textMetrica) textMetrica.innerHTML = select2.value.slice(0,-1)
+      if (textExponente) textExponente.innerHTML = '3'
+    })
     
     let prev1 = select1.value;
     let prev2 = select2.value;
@@ -254,8 +268,6 @@ import ChangeIcon from '../assets/icons/transfer.svg'
 
     select1.addEventListener('change', () => {
       if (select1.value === select2.value) {
-        // Aquí sabemos prev1 era diferente (sino el usuario no cambió nada)
-        // Intercambiamos usando prev1 → select2, y select1 queda con nuevo valor
         select2.value = prev1;
       }
     });
@@ -265,34 +277,34 @@ import ChangeIcon from '../assets/icons/transfer.svg'
         select1.value = prev2;
       }
     });
+    
 
-    /* const selects = document.querySelectorAll("select") as NodeListOf<HTMLSelectElement>
-    selects.forEach( (select : HTMLSelectElement) => {
-      select.addEventListener('change', () => {
-        if (select1.value === select2.value) {
-          intercambiar()
-        }
-      })
-    }) */
+    /* Calculos de Conversiones */
+    const calcular = () => {
+      const val = parseFloat(inputCant.value) || 0;
+      let resultado = 0;
+
+      switch (select1.value+"_a_"+select2.value) {
+        case "yd3_a_m3":
+          resultado = val * 0.7646
+          break
+          
+        case "m3_a_yd3":
+          resultado = val * 1.31
+          break
+
+        default: 
+          resultado = val
+          
+      }
+
+      if (textResultado) textResultado.innerHTML = resultado.toFixed(2)
+      if (textMetrica) textMetrica.innerHTML = select2.value.slice(0,-1)
+    }
+
+    inputCant.addEventListener('change', () => {
+       calcular() 
+    })
 
   })  
 </script>
-<!-- <script>
-  document.addEventListener("astro:page-load", () => {
-    const inputYardas = document.getElementById("yardas");
-    const inputMetros = document.getElementById("metros");
-    const resultadoLabel = document.getElementById("resultado")
-    const resulMetrica = document.getElementById("metrica")
-
-    inputYardas?.addEventListener("change", () => {
-      const yardas = parseFloat(inputYardas.value);
-      if (!isNaN(yardas)) {
-        inputMetros.value = (yardas * 0.9144).toFixed(2); // redondea a 2 decimales
-        resulMetrica.innerHTML = "mts"
-        resultadoLabel.innerHTML= (yardas * 0.9144).toFixed(2);
-      } else {
-        inputMetros.value = "";
-      }
-    });
-  });
-</script> -->
