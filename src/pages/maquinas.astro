@@ -55,27 +55,27 @@ import ChangeIcon from '../assets/icons/transfer.svg'
       </div>
 
       <div class="item bg-color">
-        <h3 class="item-title">Cacular Capacidad de balde</h3>
+        <h3 class="item-title">Cacular volumen del balde</h3>
         <div class="item-data">
           <div class="formulario">
             <div class="contenWithLabel">
               <label for="baldeAncho">Ancho:</label>  
-              <input type="number" id="baldeAncho" placeholder="49 inc" min="0" max="50" maxlength="4">
+              <input type="number" id="baldeAncho" required placeholder="49 inc" min="0" max="50" maxlength="4">
             </div>
 
             <div class="contenWithLabel">
               <label for="baldeAlto">Altura:</label>
-              <input type="number" id="baldeAlto" placeholder="49 inc" min="0" max="50" maxlength="4">
+              <input type="number" id="baldeAlto" required placeholder="49 inc" min="0" max="50" maxlength="4">
             </div>
 
             <div class="contenWithLabel">
               <label for="baldeProfundidad">Profundidad:</label>
-              <input type="number" id="baldeProfundidad" placeholder="49 inc" min="0" max="50" maxlength="4">
+              <input type="number" id="baldeProfundidad" required placeholder="49 inc" min="0" max="50" maxlength="4">
             </div>
 
             <div class="contenWithLabel">
               <label for="baldemetrica">Resultado:</label>
-              <select id="baldemetrica">
+              <select id="baldemetrica" required>
                 <option value="yd3" selected>Yarda (yd³)</option>
                 <option value="m3"> Metros (m³)</option>
               </select>
@@ -83,7 +83,7 @@ import ChangeIcon from '../assets/icons/transfer.svg'
             <button id="calcBalde">Calcular</button>
           </div>
           <div class="formResult">
-            <p class="balderesultado ">0</p>
+            <p id="balderesultado">0</p><span >M</span><sup>3</sup>
           </div>
         </div>
       </div>
@@ -277,6 +277,7 @@ import ChangeIcon from '../assets/icons/transfer.svg'
           }
 
           & > button {
+            margin-top: 0.5rem ;
             grid-column: span 2;
             font-size: 1rem;
             border-radius: 5px;
@@ -296,13 +297,25 @@ import ChangeIcon from '../assets/icons/transfer.svg'
           width: 100%;
           height: 50%;
           display: flex;
-          flex-direction: column;
+          
+          flex-direction: row;
           align-items: center;
           justify-content: center;
 
           & > p {
             font-size: 3rem;
             font-family: monospace;
+          }
+          
+          & > span {
+            margin-left: 0.5rem;
+            font-size: 2rem;
+            text-transform: uppercase;
+          }
+
+          & > sup {
+            font-size: 1rem;
+            margin-top: -15px;
           }
         }
 
@@ -430,4 +443,21 @@ import ChangeIcon from '../assets/icons/transfer.svg'
     })
 
   })  
+</script>
+
+<script>
+
+  document.addEventListener('astro:page-load', () => {
+    const inputAncho = document.getElementById('baldeAncho') as HTMLInputElement
+    const inputAlto = document.getElementById('baldeAlto') as HTMLInputElement
+    const inputProf = document.getElementById('baldeProfundidad')  as HTMLInputElement
+    const calcMetrica = document.getElementById('baldemetrica') as HTMLSelectElement
+    const calcResult = document.getElementById('balderesultado') as HTMLElement
+    const btnCalc = document.getElementById('calcBalde')
+
+    btnCalc?.addEventListener('click', ()=> {
+      const calculo  = parseFloat(inputAncho.value) * parseFloat(inputAlto.value) * parseFloat(inputProf.value)
+      calcResult.innerHTML = ''+ calculo.toFixed(2)
+    })
+  })
 </script>
