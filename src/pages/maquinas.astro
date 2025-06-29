@@ -33,7 +33,7 @@ import ChangeIcon from '../assets/icons/transfer.svg'
           </div>
           <div class="cantidad">
             <!-- <label for="cant">Cantidad:</label> -->
-            <input type="number" min="0" max="50" placeholder=" Cantidad: 6"   id="cant">
+            <input type="number" min="0" max="100" placeholder=" Cantidad: 6"   id="cant">
           </div>
           <div class="result">
             <p id="resultado">0</p>
@@ -48,7 +48,10 @@ import ChangeIcon from '../assets/icons/transfer.svg'
       </div>
 
       <div class="item bg-color">
-        lala
+        <h3 class="item-title">Conversor de Volumen de Materiales</h3>
+        <div class="item-data">
+          
+        </div>
       </div>
     </div>
 
@@ -178,9 +181,9 @@ import ChangeIcon from '../assets/icons/transfer.svg'
         
         .result{
           width: 100%;
-          height: 25%;
           margin-top: 5%;
           display: flex;
+          text-wrap: pretty;
           gap: 1rem;
           font-family: monospace ;
           justify-content: center;
@@ -190,6 +193,9 @@ import ChangeIcon from '../assets/icons/transfer.svg'
             font-size: 4rem;
             margin: 0;
             padding: 0;
+            word-break: break-all;
+            overflow-wrap: break-word;
+            /* max-width: 100%; */
           }
           span {
             margin: 0;
@@ -253,7 +259,7 @@ import ChangeIcon from '../assets/icons/transfer.svg'
       inputCant.value = ''
       if (textResultado) textResultado.innerHTML = '0';
       if (textMetrica) textMetrica.innerHTML = select2.value.slice(0,-1)
-      if (textExponente) textExponente.innerHTML = '3'
+      /* if (textExponente) textExponente.innerHTML = '3' */
     })
     
     let prev1 = select1.value;
@@ -262,6 +268,7 @@ import ChangeIcon from '../assets/icons/transfer.svg'
     select1.addEventListener('focus', () => {
       prev1 = select1.value;
     });
+
     select2.addEventListener('focus', () => {
       prev2 = select2.value;
     });
@@ -288,9 +295,25 @@ import ChangeIcon from '../assets/icons/transfer.svg'
         case "yd3_a_m3":
           resultado = val * 0.7646
           break
+
+        case "yd3_a_ft3":
+          resultado = val * 27
+          break
           
         case "m3_a_yd3":
           resultado = val * 1.31
+          break
+
+        case "m3_a_ft3":
+          resultado = val * 35.3147
+          break
+
+        case "ft3_a_yd3":
+          resultado = val / 27
+          break
+
+        case "ft3_a_m3":
+          resultado = val * 0.0283168
           break
 
         default: 
@@ -303,7 +326,7 @@ import ChangeIcon from '../assets/icons/transfer.svg'
     }
 
     inputCant.addEventListener('change', () => {
-       calcular() 
+       calcular()
     })
 
   })  
