@@ -60,33 +60,43 @@ import ChangeIcon from '../assets/icons/transfer.svg'
           <div class="formulario">
             <div class="contenWithLabel">
               <label for="baldeAncho">Ancho:</label>  
-              <input type="number" id="baldeAncho" required placeholder="49 inc" min="0" max="50" maxlength="4">
+              <input type="number" id="baldeAncho" required placeholder="1.5 mts" min="0" max="50" maxlength="4">
             </div>
 
             <div class="contenWithLabel">
               <label for="baldeAlto">Altura:</label>
-              <input type="number" id="baldeAlto" required placeholder="49 inc" min="0" max="50" maxlength="4">
+              <input type="number" id="baldeAlto" required placeholder="0.7 mts" min="0" max="50" maxlength="4">
             </div>
 
             <div class="contenWithLabel">
               <label for="baldeProfundidad">Profundidad:</label>
-              <input type="number" id="baldeProfundidad" required placeholder="49 inc" min="0" max="50" maxlength="4">
+              <input type="number" id="baldeProfundidad" required placeholder="0.9 mts" min="0" max="50" maxlength="4">
             </div>
 
             <div class="contenWithLabel">
               <label for="baldemetrica">Resultado:</label>
               <select id="baldemetrica" required>
-                <option value="yd3" selected>Yarda (yd³)</option>
-                <option value="m3"> Metros (m³)</option>
+                <option value="yd3" >Yarda (yd³)</option>
+                <option value="m3" selected> Metros (m³)</option>
               </select>
             </div>
             <button id="calcBalde">Calcular</button>
           </div>
           <div class="formResult">
-            <p id="balderesultado">0</p><span >M</span><sup>3</sup>
+            <p id="balderesultado">0</p><span id="baldemetricaresult">M<sup>3</sup></span>
           </div>
         </div>
       </div>
+
+      <div class="item bg-color">
+        <h3 class="item-title">Cacular cargas de maquinarias</h3>
+        <div class="item-data">
+          <div>
+
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </section>
@@ -102,7 +112,7 @@ import ChangeIcon from '../assets/icons/transfer.svg'
 
     h1{
       margin: 0;
-      /* margin-top: 0.7rem; */
+      padding: 2rem;
       text-align: center;
       font-style: italic;
       font-size: 2rem;
@@ -132,11 +142,13 @@ import ChangeIcon from '../assets/icons/transfer.svg'
 
       .item-title {
         margin: 0;
+        margin-top: 2rem;
         text-align: center;
         font-style: italic;
         font-size: 1.1rem;
         padding: 0.5rem;
       }
+      
       .item-data{
         display: flex;
         flex-direction: column;
@@ -146,6 +158,7 @@ import ChangeIcon from '../assets/icons/transfer.svg'
         .conversiones{
           display: flex;
           width: 100%;
+          height: 50%;
           align-items: center;
           justify-content: center;
           gap: 1rem;
@@ -192,6 +205,7 @@ import ChangeIcon from '../assets/icons/transfer.svg'
         
         .cantidad{
           width: 100%;
+          height: 12%;
           display: flex;
           margin-top: 1rem;
           padding-bottom: 1rem;
@@ -215,7 +229,8 @@ import ChangeIcon from '../assets/icons/transfer.svg'
         
         .result{
           width: 100%;
-          margin-top: 5%;
+          height: 13%;
+          margin-top: 20%;
           display: flex;
           text-wrap: pretty;
           gap: 1rem;
@@ -303,7 +318,7 @@ import ChangeIcon from '../assets/icons/transfer.svg'
           justify-content: center;
 
           & > p {
-            font-size: 3rem;
+            font-size: 4rem;
             font-family: monospace;
           }
           
@@ -446,18 +461,44 @@ import ChangeIcon from '../assets/icons/transfer.svg'
 </script>
 
 <script>
-
   document.addEventListener('astro:page-load', () => {
-    const inputAncho = document.getElementById('baldeAncho') as HTMLInputElement
-    const inputAlto = document.getElementById('baldeAlto') as HTMLInputElement
-    const inputProf = document.getElementById('baldeProfundidad')  as HTMLInputElement
-    const calcMetrica = document.getElementById('baldemetrica') as HTMLSelectElement
-    const calcResult = document.getElementById('balderesultado') as HTMLElement
-    const btnCalc = document.getElementById('calcBalde')
+    const inputAncho = document.getElementById('baldeAncho') as HTMLInputElement;
+    const inputAlto = document.getElementById('baldeAlto') as HTMLInputElement;
+    const inputProf = document.getElementById('baldeProfundidad') as HTMLInputElement;
+    const calcMetrica = document.getElementById('baldemetrica') as HTMLSelectElement;
+    const calcResult = document.getElementById('balderesultado') as HTMLElement;
+    const calcResultMetrica = document.getElementById('baldemetricaresult') as HTMLElement
+    const btnCalc = document.getElementById('calcBalde');
 
-    btnCalc?.addEventListener('click', ()=> {
-      const calculo  = parseFloat(inputAncho.value) * parseFloat(inputAlto.value) * parseFloat(inputProf.value)
-      calcResult.innerHTML = ''+ calculo.toFixed(2)
-    })
-  })
+    btnCalc?.addEventListener('click', () => {
+      const ancho = parseFloat(inputAncho.value);
+      const alto = parseFloat(inputAlto.value);
+      const prof = parseFloat(inputProf.value);
+
+      if (isNaN(ancho) || isNaN(alto) || isNaN(prof)) {
+        calcResult.innerHTML = "Sin datos";
+        calcResultMetrica.innerHTML = '';
+        return;
+      }
+
+      let volumen = ancho * alto * prof;
+
+      // Convertir a la unidad seleccionada
+      switch (calcMetrica.value) {
+        case "yd3":
+          volumen *= 1.30795;
+          break;
+        case "ft3":
+          volumen *= 35.3147;
+          break;
+        case "m3":
+        default:
+          // ya está en metros cúbicos
+          break;
+      }
+
+      calcResult.innerHTML = volumen.toFixed(2) + ' ' + calcMetrica.value;
+    });
+  });
+
 </script>
