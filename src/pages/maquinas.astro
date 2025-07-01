@@ -109,9 +109,10 @@ import ChangeIcon from '../assets/icons/transfer.svg'
               <label for="">Cantidad a servir:</label>
               <input type="number"  placeholder="" id="cantidadADespachar">
             </div>
+            <!-- <button id="calcRep">Calcular</button> -->
           </div>
           <div class="formCalcCicloResult">
-            <p>0</p>
+            <p id="cicloResp">0</p>
             <span>Repeticiones</span>
           </div>
         </div>
@@ -384,6 +385,7 @@ import ChangeIcon from '../assets/icons/transfer.svg'
             }
           }
         }
+
         .formCalcCicloResult{
           display: flex;
           align-items: center;
@@ -399,6 +401,7 @@ import ChangeIcon from '../assets/icons/transfer.svg'
             
           }
         }
+
         .advertencia{
           display: flex;
           align-items: center;
@@ -460,12 +463,17 @@ import ChangeIcon from '../assets/icons/transfer.svg'
       }
     }
   }
+
   .bg-color {
     background-color: var(--color-primario);
   }
 
   .row-span {
     grid-row: span 2;
+  }
+
+  .hidden{
+    display: none;
   }
 </style>
 
@@ -603,5 +611,25 @@ import ChangeIcon from '../assets/icons/transfer.svg'
 </script>
 
 <script>
+  document.addEventListener('astro:page-load', () => {
+    const boxwarn = document.getElementById('warningbox')
+    const btnclosewarn = document.getElementById('btnwarning')
 
+    btnclosewarn?.addEventListener('click', ()=> {
+      if (boxwarn) {
+        boxwarn.style.display = 'none';
+      }
+    })
+
+    const inputdatoBalde = document.getElementById('datoDeBalde') as HTMLInputElement
+    const cantDispatch = document.getElementById('cantidadADespachar') as HTMLInputElement
+    const textCicloResp = document.getElementById('cicloResp') as HTMLElement
+
+    cantDispatch.addEventListener('change', () => {
+      const calculo = parseFloat(cantDispatch.value) / parseFloat(inputdatoBalde.value)
+      textCicloResp.innerText =  calculo.toFixed(1)
+    })
+
+
+  })
 </script>
