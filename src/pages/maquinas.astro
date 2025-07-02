@@ -3,6 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import Image from "astro/components/Image.astro";
 import bucketIlustration from '../assets/ilustrations/bucketIlus.png'
 import ChangeIcon from '../assets/icons/transfer.svg'
+const tablaDeConversionesaM3 = Array.from({length: 20}, (_,i) => {
+  const yd = i + 1;
+  return{
+    yd,
+    m: (yd * 0.7646).toFixed(2)
+  }
+})
 ---
 <Layout title="Capacidad de Carga de Retroexcavadora ">
   <section>
@@ -50,7 +57,29 @@ import ChangeIcon from '../assets/icons/transfer.svg'
       <div class="item bg-color row-span">
         <h3 class="item-title">Tabla de Conversiones Basica</h3>
         <div class="item-data">
-          
+          <div class="tablayd3am3">
+            <p>Tabla basica de yardas a metros cubicos</p>
+            <table>
+              <thead>
+                  <tr >
+                    <th>Yardas</th>
+                    <th> → </th>
+                    <th>Metros</th>
+                  </tr>
+              </thead>
+              <tbody>
+                {
+                  tablaDeConversionesaM3.map( row => 
+                  (<tr>
+                    <td>{row.yd}</td>
+                    <td> → </td>
+                    <td>{row.m}</td>
+                  </tr>)
+                  )
+                }
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -151,8 +180,8 @@ import ChangeIcon from '../assets/icons/transfer.svg'
 
     .item {
       width: 100%;
-      
       border-radius: 10px;
+      height:auto;
 
       & > img {
         width: 100%;
@@ -251,7 +280,7 @@ import ChangeIcon from '../assets/icons/transfer.svg'
         .result{
           width: 100%;
           height: 13%;
-          margin-top: 20%;
+          margin-block: 2rem;
           display: flex;
           text-wrap: pretty;
           gap: 1rem;
@@ -429,6 +458,39 @@ import ChangeIcon from '../assets/icons/transfer.svg'
 
             :hover{
               background-color: var(--color-primario);
+            }
+          }
+        }
+
+        .tablayd3am3{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          
+          & > p{
+            color: #fff9
+          }
+
+          table {
+            border-radius: 3px;
+            text-align: center;
+            padding: 0.5rem;
+            border: 1px solid var(--color-terciario-maquina);
+
+            th {
+              border-bottom: 2px solid var(--color-terciario-maquina);
+              padding-inline: 25px;
+              padding-block: 10px;
+            }
+            td{
+              padding-block: 10px;
+            }
+          }
+          tbody{
+            & > tr:hover {
+              color: var(--color-terciario-maquina);
+              background-color: var(--color-secundario)
             }
           }
         }
