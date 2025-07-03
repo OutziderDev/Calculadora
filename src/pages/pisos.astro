@@ -8,11 +8,43 @@ import pisosIlustration from '../assets/ilustrations/pisoIlus.webp'
     <h1>Calcula los elementos necesarios para tu revestimiento de pisos</h1>
 
     <div class="grid">
-      <div class="item bg-color">casa</div>
+      <div class="item bg-color">
+        <h3 class="item-title">Calcular Revestimiento</h3>
+        <div class="item-data">
+          <p class="span-2">Datos del Area:</p>
+          <div class="data-form-box">
+            <label for="ancho">Ancho</label>
+            <input type="number" min="0" max="50" maxlength="3" placeholder="3.20 mts" class="input" name="ancho" id="ancho">
+          </div>
+          <div class="data-form-box">
+            <label for="largo">Largo</label>
+            <input type="number" min="0" max="50" maxlength="3" placeholder="3.20 mts" class="input" name="largo" id="largo">
+          </div>
+           
+          <select name="tipoBaldosas" class="input" id="tipoBaldosas">
+            <option value="20x20">20 ctm x 20 ctm</option>
+            <option value="30x30">30 ctm x 30 ctm</option>
+            <option value="45x45">45 ctm x 45 ctm</option>
+            <option value="60x60">60 ctm x 60 ctm</option>
+          </select>
+          <button > Calcular</button>
+        </div>
+        <div class="item-result">
+          <p>Área según dimensiones:</p>
+          <div>
+            <span id="resultadoArea">0</span> <p>M<sup>2</sup></p>
+          </div>
+          <p>Cantidad requerida:</p>
+          <div>
+            <span id="resultadoRevestimiento">0</span> <p>Unidades</p>
+          </div>
+        </div>
+      </div>
       <div class="item bg-color">saca</div>
-      <div class="item ">
+      <div class="item">
         <Image transition:name="iluspisos" priority src={pisosIlustration} width={pisosIlustration.width} height={pisosIlustration.height} alt="Ilustración de la seccion de Pisos" />
       </div>
+      
     </div>
   </section>
 </Layout>
@@ -32,26 +64,130 @@ import pisosIlustration from '../assets/ilustrations/pisoIlus.webp'
     font-style: italic;
     padding-block: 2rem;
     width: 100%;
+    font-weight: bold;
   }
 
   .grid{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 0.5rem;
+    gap: 1rem;
+    
+  }
 
+  .item {
+    padding: 0.5rem;
+    border-radius: 5px;
+    width: auto;
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+
+    & > img{
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .item-title{
+    margin: 0;
+    text-align: center;
+    text-wrap: balance;
+    margin-block: 0.5rem;
+    height: 10%;
+  }
+
+  .item-data{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+    padding-block: 1rem;
+    height: 40%;
+
+    & > p {
+      margin: 0;
+      padding: 0;
+      font-weight: bold;
+    }
+
+    & > button {
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      background-color: var(--color-terciario-maquina);
+    }
+    & > button:hover{
+      filter: contrast(120%)
+    }
+    & > button:active{
+      filter: contrast(150%)
+    }
+  }
+
+  .item-result{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 50%;
+
+    & > div {
+      text-align: center;
+      
+      & > span {
+        font-family: monospace;
+        font-size: 2rem;
+        color: var(--color-terciario-maquina);
+      }
+
+      & > p{
+        font-weight: bold;
+        font-size: 1.2rem;
+        display: inline;
+      }
+    }
+
+    & > p {
+      margin: 0;
+      padding: 0;
+      font-weight: bold;
+    }
+    
   }
 
   .bg-color {
     background-color: var(--color-secundario);
   }
 
+  .data-form-box{
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  } 
+
   .input {
-    
+    border-radius: 5px;
+    border: none;
+    padding: 0.3rem;
+    outline: none;
+    box-shadow: 1px 1px 1px 2px #ccc;
+
+  }
+  .input:focus {
+    box-shadow: 1px 1px 1px 2px var(--color-terciario-maquina);
+  }
+
+  .span-2{
+    grid-column: span 2;
   }
 
   @media (width < 1024px) {
     section {
       width: 100%;
+    }
+
+    h1{
+      font-size: 1.1rem;
     }
 
     .grid {
