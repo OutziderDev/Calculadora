@@ -1,8 +1,61 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Image from 'astro/components/Image.astro'
+import pisosIlustration from '../assets/ilustrations/pisoIlus.webp'
 ---
 <Layout title="Calculador de Materiales para Pisos">
   <section>
-  
+    <h1>Calcula los elementos necesarios para tu revestimiento de pisos</h1>
+
+    <div class="grid">
+      <div class="item bg-color">casa</div>
+      <div class="item bg-color">saca</div>
+      <div class="item ">
+        <Image transition:name="iluspisos" priority src={pisosIlustration} width={pisosIlustration.width} height={pisosIlustration.height} alt="Ilustración de la seccion de Pisos" />
+      </div>
+    </div>
   </section>
 </Layout>
+
+<style>
+  section{
+    width: 90%;
+    height: 100%;
+    margin-inline: auto;
+    padding: 0.5rem;
+    color: #fff;
+  }
+  
+  h1{
+    margin: 0;
+    text-align: center;
+    font-style: italic;
+    padding-block: 2rem;
+    width: 100%;
+  }
+
+  .grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+
+  }
+
+  .bg-color {
+    background-color: var(--color-secundario);
+  }
+
+  .input {
+    
+  }
+
+  @media (width < 1024px) {
+    section {
+      width: 100%;
+    }
+
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }  
+</style>
