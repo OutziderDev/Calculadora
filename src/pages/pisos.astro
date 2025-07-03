@@ -22,10 +22,10 @@ import pisosIlustration from '../assets/ilustrations/pisoIlus.webp'
           </div>
            
           <select name="tipoBaldosas" class="input" id="tipoBaldosas">
-            <option value="20x20">20 ctm x 20 ctm</option>
-            <option value="30x30">30 ctm x 30 ctm</option>
-            <option value="45x45">45 ctm x 45 ctm</option>
-            <option value="60x60">60 ctm x 60 ctm</option>
+            <option value="0.20">20 ctm x 20 ctm</option>
+            <option value="0.30">30 ctm x 30 ctm</option>
+            <option value="0.45" selected>45 ctm x 45 ctm</option>
+            <option value="0.60">60 ctm x 60 ctm</option>
           </select>
           <button > Calcular</button>
         </div>
@@ -195,3 +195,24 @@ import pisosIlustration from '../assets/ilustrations/pisoIlus.webp'
     }
   }  
 </style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const anchoPiso = document.getElementById('ancho') as HTMLInputElement
+    const largoPiso = document.getElementById('largo') as HTMLInputElement
+    const tipoRevestimiento = document.getElementById('tipoBaldosas') as HTMLSelectElement
+    const resultArea = document.getElementById('resultadoArea') as HTMLElement
+    const resultRevestimiento = document.getElementById('resultadoRevestimiento') as HTMLElement
+    let calcArea : number
+    const areaRevestimiento : number = parseFloat(tipoRevestimiento.value) * parseFloat(tipoRevestimiento.value)
+    
+    largoPiso?.addEventListener('change', () => {
+      calcArea = parseFloat(anchoPiso.value) * parseFloat(largoPiso.value)
+      resultArea.innerText = calcArea.toFixed(2)
+
+      const cantidad = (calcArea / areaRevestimiento) * 1.1
+      resultRevestimiento.innerText = ''+cantidad.toFixed(0)
+    })
+    
+  })
+</script>
