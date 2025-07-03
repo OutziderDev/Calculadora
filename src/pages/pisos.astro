@@ -11,7 +11,7 @@ import pisosIlustration from '../assets/ilustrations/pisoIlus.webp'
       <div class="item bg-color">
         <h3 class="item-title">Calcular Revestimiento</h3>
         <div class="item-data">
-          <p class="span-2">Datos del Area:</p>
+          <p class="span-2">Dimensiones del Area:</p>
           <div class="data-form-box">
             <label for="ancho">Ancho</label>
             <input type="number" min="0" max="50" maxlength="3" placeholder="3.20 mts" class="input" name="ancho" id="ancho">
@@ -27,7 +27,7 @@ import pisosIlustration from '../assets/ilustrations/pisoIlus.webp'
             <option value="0.45" selected>45 ctm x 45 ctm</option>
             <option value="0.60">60 ctm x 60 ctm</option>
           </select>
-          <button > Calcular</button>
+          <button id="btncalcmaterial" > Calcular</button>
         </div>
         <div class="item-result">
           <p>Área según dimensiones:</p>
@@ -38,6 +38,7 @@ import pisosIlustration from '../assets/ilustrations/pisoIlus.webp'
           <div>
             <span id="resultadoRevestimiento">0</span> <p>Unidades</p>
           </div>
+          <span class="leyenda">incluye un 10% adicional por errores</span>
         </div>
       </div>
       <div class="item bg-color">saca</div>
@@ -94,7 +95,7 @@ import pisosIlustration from '../assets/ilustrations/pisoIlus.webp'
     text-align: center;
     text-wrap: balance;
     margin-block: 0.5rem;
-    height: 10%;
+    height: 5%;
   }
 
   .item-data{
@@ -152,6 +153,11 @@ import pisosIlustration from '../assets/ilustrations/pisoIlus.webp'
       padding: 0;
       font-weight: bold;
     }
+
+    .leyenda {
+      color: #fff5;
+      text-align: center;
+    }
     
   }
 
@@ -203,16 +209,20 @@ import pisosIlustration from '../assets/ilustrations/pisoIlus.webp'
     const tipoRevestimiento = document.getElementById('tipoBaldosas') as HTMLSelectElement
     const resultArea = document.getElementById('resultadoArea') as HTMLElement
     const resultRevestimiento = document.getElementById('resultadoRevestimiento') as HTMLElement
-    let calcArea : number
-    const areaRevestimiento : number = parseFloat(tipoRevestimiento.value) * parseFloat(tipoRevestimiento.value)
-    
-    largoPiso?.addEventListener('change', () => {
-      calcArea = parseFloat(anchoPiso.value) * parseFloat(largoPiso.value)
-      resultArea.innerText = calcArea.toFixed(2)
+    const btnCalcular = document.getElementById('btncalcmaterial')
+        
+    btnCalcular?.addEventListener('click',() => {
+      if ( isNaN(parseFloat(anchoPiso.value)) || isNaN(parseFloat(largoPiso.value)) ) {
+        alert('Introduzca las dimensiones')
+        return
+      }
+      const calcArea = parseFloat(anchoPiso.value) * parseFloat(largoPiso.value)
+      const areaDeMaterial : number = parseFloat(tipoRevestimiento.value) * parseFloat(tipoRevestimiento.value)
 
-      const cantidad = (calcArea / areaRevestimiento) * 1.1
-      resultRevestimiento.innerText = ''+cantidad.toFixed(0)
+      const calcCantRevestimiento = (calcArea / areaDeMaterial) * 1.1
+
+      resultArea.innerText = calcArea.toFixed(2) 
+      resultRevestimiento.innerText = calcCantRevestimiento.toFixed(0)
     })
-    
   })
 </script>
