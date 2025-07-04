@@ -41,7 +41,31 @@ import pisosIlustration from '../assets/ilustrations/pisoIlus.webp'
           <span class="leyenda">incluye un 10% adicional por errores</span>
         </div>
       </div>
-      <div class="item bg-color">saca</div>
+      <div class="item bg-color">
+        <h3 class="item-title">Cálculo de precio</h3>
+        <div class="item-data">
+          <p class="span-2">Datos Generales:</p>
+          <div class="data-form-box">
+            <label for="area">Área de revestimiento</label>
+            <input class="input" type="number" id="area" placeholder="15.36 m" min="0" max="100" maxlength="3">
+          </div>
+          <div class="data-form-box">
+            <label for="precio">Precio por M²</label>
+            <input type="number" id="precio" class="input" placeholder="4.99 $">
+          </div>
+          <div class="data-form-box">
+            <label for="mtxcaja">Metros² por caja</label>
+            <input type="number" id="mtxcaja" class="input" placeholder="2.04 m2">
+          </div>
+          <button id="btnCalcularPrecio">Calcular</button>
+        </div>
+        <div class="item-result">
+          <p>Precio total de cajas:</p>
+          <div>
+            <span id="resultPrecio">0</span> <p>Usd.</p>
+          </div>
+        </div>
+      </div>
       <div class="item">
         <Image transition:name="iluspisos" priority src={pisosIlustration} width={pisosIlustration.width} height={pisosIlustration.height} alt="Ilustración de la seccion de Pisos" />
       </div>
