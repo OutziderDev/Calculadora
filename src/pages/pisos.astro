@@ -41,6 +41,7 @@ import pisosIlustration from '../assets/ilustrations/pisoIlus.webp'
           <span class="leyenda">incluye un 10% adicional por errores</span>
         </div>
       </div>
+
       <div class="item bg-color">
         <h3 class="item-title">Cálculo de precio</h3>
         <div class="item-data">
@@ -60,12 +61,18 @@ import pisosIlustration from '../assets/ilustrations/pisoIlus.webp'
           <button id="btnCalcularPrecio">Calcular</button>
         </div>
         <div class="item-result">
-          <p>Precio total de cajas:</p>
+          <p>Precio unitario por caja</p>
           <div>
-            <span id="resultPrecio">0</span> <p>Usd.</p>
+            <span id="resultPrecio">0</span> <p>Usd.</p> 
+          </div>
+          <p>Precio total de material y precio</p>
+          <div>
+            <span id="resultMaterialTotal">0</span> <p>Cajas con valor de: </p><br>
+            <span id="precioTotal">0</span><p>Usd.</p>
           </div>
         </div>
       </div>
+      
       <div class="item">
         <Image transition:name="iluspisos" priority src={pisosIlustration} width={pisosIlustration.width} height={pisosIlustration.height} alt="Ilustración de la seccion de Pisos" />
       </div>
@@ -247,6 +254,35 @@ import pisosIlustration from '../assets/ilustrations/pisoIlus.webp'
 
       resultArea.innerText = calcArea.toFixed(2) 
       resultRevestimiento.innerText = calcCantRevestimiento.toFixed(0)
+    })
+  })
+</script>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const areaInput = document.getElementById('area') as HTMLInputElement
+    const precioxMetro = document.getElementById('precio') as HTMLInputElement
+    const mxcaja = document.getElementById('mtxcaja') as HTMLInputElement 
+    const resPrecioUni = document.getElementById('resultPrecio') as HTMLElement
+    const resMaterialTotal = document.getElementById('resultMaterialTotal') as HTMLElement
+    const resPrecioTotal = document.getElementById('precioTotal') as HTMLElement
+    const btnCalcPrecios = document.getElementById('btnCalcularPrecio') as HTMLElement
+
+    btnCalcPrecios.addEventListener('click', () => {
+      if ( isNaN(parseFloat(precioxMetro.value)) || isNaN(parseFloat(mxcaja.value)) ) {
+        alert('Introduzca las datos')
+        return
+      }
+
+      const calc = parseFloat(precioxMetro.value) * parseFloat(mxcaja.value) 
+      resPrecioUni.innerText = calc.toFixed(2)
+
+      const areaConMargen = parseFloat(areaInput.value) * 1.1
+      const material = Math.ceil(areaConMargen / parseFloat(mxcaja.value))
+      resMaterialTotal.innerText = material.toFixed(0)
+
+      const precioFinal = material * calc
+      resPrecioTotal.innerHTML = precioFinal.toFixed(2)
     })
   })
 </script>
