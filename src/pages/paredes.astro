@@ -1,8 +1,86 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ilusParedes from "../assets/ilustrations/paredesIlus.webp"
+import { Image } from "astro:assets";
 ---
 <Layout title="Calculador de Materiales para Paredes">
   <section>
-  
+    <h1>¡Calcula todo sobre tus maquinarias!</h1>
+    <div class="grid">
+   
+      <div class="item">
+        <Image priority transition:name="iluspared" src={ilusParedes} alt={"Ilustración de la sección de sistemas constructivos"}  />
+      </div>
+
+      <div class="item"></div>
+      <div class="item">casa</div>
+
+    </div>
   </section>
 </Layout>
+
+<style>
+  section{
+    width: 90%;
+    height: 100%;
+    margin-inline: auto;
+    padding: 0.5rem;
+    color: #fff;
+
+    h1{
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+      font-style: italic;
+      font-size: 2rem;
+    }
+    
+    .grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 2rem;
+      width: 100%;
+      margin-top: 0.6rem;
+      padding-bottom: 3rem;
+    }
+
+    .item {
+      padding: 0.5rem;
+      border-radius: 5px;
+      width: auto;
+      max-height: 500px;
+      display: flex;
+      flex-direction: column;
+
+      & > img{
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .item-title{
+      margin: 0;
+      text-align: center;
+      text-wrap: balance;
+      margin-block: 0.5rem;
+      height: 5%;
+    }
+
+    .input {
+      border-radius: 5px;
+      border: none;
+      padding: 0.3rem;
+      outline: none;
+      box-shadow: 1px 1px 1px 2px #ccc;
+    }
+    .input:focus {
+      box-shadow: 1px 1px 1px 2px var(--color-terciario-maquina);
+    }
+
+    .span-2{
+      grid-column: span 2;
+    }
+  }
+</style>
