@@ -31,8 +31,11 @@ import { Image } from "astro:assets";
         <div class="lamResult">
           <p>Cantidad fisica de láminas:</p>
           <span id="resultLam">0</span>
+          <p>Cantidad de Cemento:</p>
+          <span id="resultCemento">0</span>
         </div>
       </div>
+
       <div class="item bg-color">casa</div>
 
     </div>
@@ -112,7 +115,7 @@ import { Image } from "astro:assets";
       }
       span {
         color: var(--color-terciario-maquina);
-        font-size: 2rem;
+        font-size: 3rem;
         font-family: monospace;
         text-align: center;
       }
@@ -163,17 +166,24 @@ import { Image } from "astro:assets";
     const tipoLaminas = document.getElementById('lamina') as HTMLSelectElement
     const cantLaminas = document.getElementById('cantLam') as HTMLInputElement
     const resultado = document.getElementById('resultLam') as HTMLElement
-
+    const resultCemento = document.getElementById('resultCemento') as HTMLElement
+    
     cantLaminas?.addEventListener('change', () => {
       let calc;
+      const volumen = parseFloat(cantLaminas.value) * 0.015
+
       if( tipoLaminas.value === '4x8'){
-        calc = parseFloat(cantLaminas.value) / 2.97
+        calc = parseFloat(cantLaminas.value) / 2.9768
       }
       if ( tipoLaminas.value === '4x10'){
-        calc = parseFloat(cantLaminas.value) / 3.71
+        calc = parseFloat(cantLaminas.value) / 3.721
       }
 
-      resultado.innerText = ''+ calc?.toFixed(1)
+      resultado.innerText = ''+ calc?.toFixed(0)
+
+      const sacosxM3 = 7.5
+      const sacos = Math.ceil(volumen * sacosxM3)
+      resultCemento.innerText = '' + sacos
     })
 
   })
