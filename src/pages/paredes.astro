@@ -18,9 +18,9 @@ import { Image } from "astro:assets";
           <div class="input-group">
             <label for="lamina">Tipo de lámina:</label>
             <select class="input" id="lamina">
-              <option value="4x8g">PE-100 de 4'x 8' / 3.94</option>
+              <option value="4x8">PE-100 de 4'x 8' / 3.94</option>
               <option value="4x10">PE-50 de 4'x 10' / 1.97</option>
-              <option value="4x8s">PE-50 de 4'x 8' / 1.97</option>
+              <!-- <option value="4x8s">PE-50 de 4'x 8' / 1.97</option> -->
             </select>
           </div>
           <div class="input-group">
@@ -30,7 +30,7 @@ import { Image } from "astro:assets";
         </div>
         <div class="lamResult">
           <p>Cantidad fisica de láminas:</p>
-          <span>0</span>
+          <span id="resultLam">0</span>
         </div>
       </div>
       <div class="item bg-color">casa</div>
@@ -157,3 +157,24 @@ import { Image } from "astro:assets";
     }
   }
 </style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const tipoLaminas = document.getElementById('lamina') as HTMLSelectElement
+    const cantLaminas = document.getElementById('cantLam') as HTMLInputElement
+    const resultado = document.getElementById('resultLam') as HTMLElement
+
+    cantLaminas?.addEventListener('change', () => {
+      let calc;
+      if( tipoLaminas.value === '4x8'){
+        calc = parseFloat(cantLaminas.value) / 2.97
+      }
+      if ( tipoLaminas.value === '4x10'){
+        calc = parseFloat(cantLaminas.value) / 3.71
+      }
+
+      resultado.innerText = ''+ calc?.toFixed(1)
+    })
+
+  })
+</script>
