@@ -36,14 +36,44 @@ import { Image } from "astro:assets";
         </div>
       </div>
 
-      <div class="item bg-color">casa</div>
+      <div class="item bg-color">
+        <h1 class="item-title">Tabla básica de láminas</h1>
+        <div class="formu">
+          <div class="input-group-inline">
+            <label for="tipLamxtabla">Tipo de Lamina</label>
+            <select class="input" id="tipLamxtabla">
+              <option value="4x8">PE-100 de 4'x 8' / 3.94</option>
+              <option value="4x10">PE-50 de 4'x 10' / 1.97</option>
+              <!-- <option value="4x8s">PE-50 de 4'x 8' / 1.97</option> -->
+            </select>
+          </div>
+        </div>
+        <div class="tabla">
+          <table>
+              <thead>
+                  <tr >
+                    <th>Yardas</th>
+                    <th> → </th>
+                    <th>Metros</th>
+                  </tr>
+              </thead>
+              <tbody id="itemTable">
+                  <tr>
+                    <td>a</td>
+                    <td> → </td>
+                    <td>b</td>
+                  </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
 
     </div>
   </section>
 </Layout>
 
 <style>
-  section{
+  section {
     width: 90%;
     height: 100%;
     margin-inline: auto;
@@ -91,6 +121,7 @@ import { Image } from "astro:assets";
     }
     
     .formu {
+      width: 100%;
       margin-top: 1rem;
       padding-block: 2rem;
       display: grid;
@@ -102,6 +133,20 @@ import { Image } from "astro:assets";
         display: flex;
         flex-direction: column;
         gap: 0.3rem
+      }
+
+      .input-group-inline {
+        width: 100%;
+        grid-column: span 2;
+        display: flex; 
+        justify-content: center;
+        gap: 1rem;
+        align-items: center;
+
+        label{
+          display: block;
+          text-wrap: nowrap;
+        }
       }
     }
 
@@ -138,6 +183,39 @@ import { Image } from "astro:assets";
 
     .bg-color {
       background-color: var(--color-secundario);
+    }
+
+    .tabla {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      
+      & > p{
+        color: #fff9
+      }
+
+      table {
+        border-radius: 3px;
+        text-align: center;
+        padding: 0.5rem;
+        border: 1px solid var(--color-terciario-maquina);
+
+        th {
+          border-bottom: 2px solid var(--color-terciario-maquina);
+          padding-inline: 25px;
+          padding-block: 10px;
+        }
+        td{
+          padding-block: 10px;
+        }
+      }
+      tbody{
+        & > tr:hover {
+          color: var(--color-terciario-maquina);
+          background-color: var(--color-secundario)
+        }
+      }
     }
 
     @media ( width < 1024px){
