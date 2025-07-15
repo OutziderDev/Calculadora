@@ -50,21 +50,17 @@ import { Image } from "astro:assets";
         </div>
         <div class="tabla">
           <table>
-              <thead>
-                  <tr >
-                    <th>Yardas</th>
-                    <th> → </th>
-                    <th>Metros</th>
-                  </tr>
-              </thead>
-              <tbody id="itemTable">
-                  <tr>
-                    <td>a</td>
-                    <td> → </td>
-                    <td>b</td>
-                  </tr>
-              </tbody>
-            </table>
+            <thead>
+              <tr >
+                <th>Lam. en Unidad</th>
+                <th> → </th>
+                <th>Lam. en Metros</th>
+              </tr>
+            </thead>
+            <tbody class="tableitem" id="itemTable">
+              
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -196,6 +192,7 @@ import { Image } from "astro:assets";
       }
 
       table {
+        margin-top: 0.5rem;
         border-radius: 3px;
         text-align: center;
         padding: 0.5rem;
@@ -211,12 +208,18 @@ import { Image } from "astro:assets";
         }
       }
       tbody{
+        overflow-y: auto;
+
         & > tr:hover {
           color: var(--color-terciario-maquina);
           background-color: var(--color-secundario)
         }
       }
+
+
     }
+
+    
 
     @media ( width < 1024px){
       section {
@@ -265,4 +268,35 @@ import { Image } from "astro:assets";
     })
 
   })
+</script>
+
+<script lang="ts" >
+  document.addEventListener('DOMContentLoaded', () => {
+    const select = document.getElementById('tipLamxtabla');
+    const tbody  = document.getElementById('itemTable');
+    const mtsPorUnidad = { '4x8': 2.9768, '4x10': 3.721 };
+    const LIMITE = 10;
+
+    function renderTabla(tipo) {
+      const metraje = mtsPorUnidad[tipo];
+      if (!metraje) return;           // valor inesperado → salimos
+
+      let filas = '';
+      for (let i = 1; i <= LIMITE; i++) {
+        filas += `
+          <tr>
+            <td>${i}</td>
+            <td>→</td>
+            <td>${(i * metraje).toFixed(2)}</td>
+          </tr>`;
+      }
+      tbody.innerHTML = filas;
+    }
+
+    /* pinta la tabla al iniciar */
+    renderTabla(select.value);
+
+    /* repinta al cambiar */
+    select.addEventListener('change', () => renderTabla(select.value));
+  });
 </script>
